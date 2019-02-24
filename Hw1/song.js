@@ -32,6 +32,9 @@ console.log(songwriter);
 var wasNumber1US = true;
 var wasNumber1UK = false;
 
+console.log(wasNumber1US);
+console.log(wasNumber1US);
+
 // Object Datatype
 function newSong(artist, songName, genre, albumName, producer, releaseYear, songwriter, wasNumber1UK, wasNumber1US){
     this.artist = artist;
