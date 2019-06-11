@@ -1,0 +1,40 @@
+#color1{
+    background-color: #0000FF;
+}
+#color2{
+    background-color: #ff0000;
+}
+#color3{
+    background-color: #006909;
+}
+#color4{
+    background-color: #ffd900;
+}
+#color5{
+    background-color: #000000;
+}
+#color6{
+    background-color: #a7a7a7;
+}
+#color7{
+    background-color: #ff9100;
+}
+#color8{
+    background-color: #2e2e30;
+}
+#color9{
+    background-color: #ff00ea;
+}
+#color10{
+    background-color: #6c6c92;
+}
+
+.rectangle{
+    width: 100px;
+    height: 50px;
+    padding: 50px 50px 0px 50px;
+}
+
+#rectangleWrapper{
+    padding: 50px 50px 0px 50px;
+}
