@@ -1,9 +1,13 @@
 const fizzBuzz = () => {
+    // Starting Number
     let number = 1;
+    // Variable for the results
+    let result = "";
 
     while(number <= 100){
-        let result = "";
-
+        // Reseting the result every loop
+        result = "";
+        
         // Check for Fizz
         if(number % 3 === 0){
             result += "Fizz";
