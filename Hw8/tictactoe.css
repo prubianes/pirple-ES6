@@ -1,0 +1,33 @@
+body{
+    background-color: grey;
+    display: flex;
+    justify-content: center;
+}
+
+.box{
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    background-color: white;
+}
+
+.wrapper{
+    display: grid;
+    grid-template-rows: 100px 100px 100px;
+    grid-template-columns: 100px 100px 100px;
+}
+
+.o{
+    background-color: #c9c9c7;
+}
+
+.x{
+    background-color: #b3b3b3;
+    color: red;
+}
+
+.won{
+    background-color: #86ea52;
+}
