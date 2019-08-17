@@ -1,12 +1,22 @@
+// Initialize the move and finish variables
 let moves = 0;
 let finish = false;
 
+// Listener in the wrapper for making the click
 wrapper.addEventListener("mousedown", mark);
 
+/**
+ * mark function, it marks the click and checks for the result.
+ * @param {*} e 
+ */
 function mark(e){
+    // gets the selected div
     let divSelected = document.getElementById(e.target.id);
     let whoMove = "";
+
+    // Checks if the div is empty otherwise don't do anything
     if(divSelected.innerText == ""){
+        // It decide if its X or O
         if(moves % 2 === 0){
             divSelected.innerHTML = "X";
             divSelected.classList.add("x")   
@@ -16,15 +26,19 @@ function mark(e){
             divSelected.classList.add("o")
             whoMove = "O";
         }
+        // Check the results.
         checkResult()
         
+        // Add a move
         moves++;
+        // if someone won gives the alert and reset the board.
         if(finish){
             setTimeout(() => {
                 alert(whoMove + " has Won");
                 reset();
             }, 300);
         }
+        // if there's no more free divs gives the cats game alert
         if(moves === 9){
             setTimeout(() => {
                 alert("Cats game!");
@@ -34,6 +48,9 @@ function mark(e){
     }
 }
 
+/**
+ * Check all the posible results for game ending.
+ */
 const checkResult = () => {
     let div1 = document.getElementById("1");
     let div2 = document.getElementById("2");
@@ -57,6 +74,12 @@ const checkResult = () => {
     threeEqual(div3, div5, div7);
 }
 
+/**
+ * Check for 3 equal divs.
+ * @param {*} one 
+ * @param {*} two 
+ * @param {*} three 
+ */
 const threeEqual = (one, two, three) => {
     if(one.innerText != "" && two.innerText != "" && three.innerText != ""){
         if(one.innerText === two.innerText && two.innerText === three.innerText){
@@ -68,6 +91,9 @@ const threeEqual = (one, two, three) => {
     }
 }
 
+/**
+ * Reset the game after is done.
+ */
 const reset = () => {
     let divs = document.getElementsByClassName("box");
     for (let index = 0; index < divs.length; index++) {
