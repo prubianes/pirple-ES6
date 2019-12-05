@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>To Do List Manager</title>
+</head>
+<body>
+    <header>
+
+    </header>
+    <Section id="welcome" class="show">
+        <h1>Welcome to the To Do List Manager</h1>
+        <div>
+            <button onclick="navegate('welcome', 'login')">Log In</button>
+            <p>or</p>
+            <button onclick="navegate('welcome', 'signup')">Sign Up</button>
+        </div>
+    </Section>
+
+    <section id="signup" class="hidden">
+        <form action="" method="POST" onsubmit="userSignUp()">
+            <div>
+                <label for="name">First Name:</label>
+                <input type="text" id="fName" name="first_name">
+            </div>
+            <div>
+                <label for="name">Last Name:</label>
+                <input type="text" id="lName" name="last_name">
+            </div>
+            <div>
+                <label for="name">User:</label>
+                <input type="text" id="user" name="user">
+            </div>
+            <div>
+                <label for="name">Password:</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div>
+                <label for="mail">E-mail:</label>
+                <input type="email" id="mail" name="user_mail">
+            </div>
+            <input type="submit" value="Sign Up">
+        </form>
+    </section>
+
+    <section id="login" class="hidden">
+        <form action="" method="POST" onsubmit="userLogin()">
+            <div>
+                <label for="name">User:</label>
+                <input type="text" id="user" name="user">
+            </div>
+            <div>
+                <label for="name">Password:</label>
+                <input type="text" id="password" name="password">
+            </div>
+            <input type="submit" value="Login">
+        </form>
+    </section>
+
+    <section id="dashboard">
+        
+    </section>
+</body>
+<script src="todolist.js"></script>
+</html>
