@@ -1,3 +1,6 @@
+let user;
+
+
 /**
  * This function manage the navegation between sections in the Single Page App
  * @param from 
@@ -13,3 +16,8 @@ const navegate = (from, to) => {
     sectionTo.classList.remove('hidden');
     sectionTo.classList.add('show');
 };
+
+ const userSignUp = () =>{
+    console.log("llegue");
+
+ };

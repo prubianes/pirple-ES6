@@ -19,7 +19,7 @@
     </Section>
 
     <section id="signup" class="hidden">
-        <form action="" method="POST" onsubmit="userSignUp()">
+        <form onsubmit="userSignUp()" name="userSignUp">
             <div>
                 <label for="name">First Name:</label>
                 <input type="text" id="fName" name="first_name">
@@ -45,7 +45,7 @@
     </section>
 
     <section id="login" class="hidden">
-        <form action="" method="POST" onsubmit="userLogin()">
+        <form method="POST" onsubmit="userLogin()">
             <div>
                 <label for="name">User:</label>
                 <input type="text" id="user" name="user">
