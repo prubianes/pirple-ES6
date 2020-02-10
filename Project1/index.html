@@ -19,40 +19,40 @@
     </Section>
 
     <section id="signup" class="hidden">
-        <form onsubmit="userSignUp()" name="userSignUp">
+        <form name="userSignUpForm" id="userSignUpForm">
             <div>
                 <label for="name">First Name:</label>
-                <input type="text" id="fName" name="first_name">
+                <input type="text" id="fName-SignUp" name="first_name">
             </div>
             <div>
                 <label for="name">Last Name:</label>
-                <input type="text" id="lName" name="last_name">
+                <input type="text" id="lName-SignUp" name="last_name">
             </div>
             <div>
                 <label for="name">User:</label>
-                <input type="text" id="user" name="user">
+                <input type="text" id="user-SignUp" name="user">
             </div>
             <div>
                 <label for="name">Password:</label>
-                <input type="password" id="password" name="password">
+                <input type="password" id="password-SignUp" name="password">
             </div>
             <div>
                 <label for="mail">E-mail:</label>
-                <input type="email" id="mail" name="user_mail">
+                <input type="email" id="mail-SignUp" name="user_mail">
             </div>
-            <input type="submit" value="Sign Up">
+            <input id="userSignUpBTN" type="submit" value="Sign Up">
         </form>
     </section>
 
     <section id="login" class="hidden">
-        <form method="POST" onsubmit="userLogin()">
+        <form name="loginForm" id="loginForm">
             <div>
                 <label for="name">User:</label>
-                <input type="text" id="user" name="user">
+                <input type="text" id="user-login" name="user">
             </div>
             <div>
                 <label for="name">Password:</label>
-                <input type="text" id="password" name="password">
+                <input type="text" id="password-login" name="password">
             </div>
             <input type="submit" value="Login">
         </form>

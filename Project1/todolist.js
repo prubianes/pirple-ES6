@@ -17,7 +17,20 @@ const navegate = (from, to) => {
     sectionTo.classList.add('show');
 };
 
- const userSignUp = () =>{
+const userSignUp = (event) => {
+    event.preventDefault();
     console.log("llegue");
+    console.log(document.getElementById("fName-SignUp").value);
+};
 
- };
+const userLogin = (event) => {
+
+}
+
+// Event Listeners
+
+// Signup Form
+document.getElementById("userSignUpForm").addEventListener("submit",userSignUp);
+
+// Login Form
+document.getElementById("loginForm").addEventListener("submit",userLogin);
