@@ -9,12 +9,17 @@
     <header>
 
     </header>
+
+    <Section id="errorPanel" class="hidden">
+        <p id="error"></p>
+    </Section>
+
     <Section id="welcome" class="show">
         <h1>Welcome to the To Do List Manager</h1>
         <div>
-            <button onclick="navegate('welcome', 'login')">Log In</button>
+            <button onclick="navegate(navegation.welcome, navegation.login)">Log In</button>
             <p>or</p>
-            <button onclick="navegate('welcome', 'signup')">Sign Up</button>
+            <button onclick="navegate(navegation.welcome, navegation.signup)">Sign Up</button>
         </div>
     </Section>
 
@@ -54,7 +59,7 @@
                 <label for="name">Password:</label>
                 <input type="text" id="password-login" name="password">
             </div>
-            <input type="submit" value="Login">
+            <input id="userLoginBTN" type="submit" value="Login">
         </form>
     </section>
 
