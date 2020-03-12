@@ -74,7 +74,7 @@ const resetErrors = () => {
 
 // View Functions
 /**
- * This function manege the User Sign up form and creates a new user
+ * This function manage the User Sign up form and creates a new user
  * @param {*} event 
  */
 const userSignUp = (event) => {
@@ -94,6 +94,10 @@ const userSignUp = (event) => {
     }
 };
 
+/**
+ * This function manage the User Login form and creates a new user
+ * @param {*} event 
+ */
 const userLogin = (event) => {
     event.preventDefault();
     if(storage.getItem(document.getElementById("user-login").value) !== null){
