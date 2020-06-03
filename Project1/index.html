@@ -5,72 +5,82 @@
     <link rel="stylesheet" href="style.css">
     <title>To Do List Manager</title>
 </head>
-<body>
+<body onload="test()">
     <header>
-        <div id="headerLoggedIn">
-
-        </div>
-        <div id="headerNoUser">
-            
+        <div id="header" class="hidden">
+            <ul class="menu">
+                <li><button id="settings">Account Settings</button></li>
+                <li><button id="logout">Log Out</button></li>
+            </ul>
         </div>
     </header>
-
-    <Section id="errorPanel" class="hidden">
-        <p id="error"></p>
-    </Section>
-
-    <Section id="welcome" class="show">
-        <h1>Welcome to the To Do List Manager</h1>
-        <div>
-            <button onclick="navegate(navegation.welcome, navegation.login)">Log In</button>
-            <p>or</p>
-            <button onclick="navegate(navegation.welcome, navegation.signup)">Sign Up</button>
-        </div>
-    </Section>
-
-    <section id="signup" class="hidden">
-        <form name="userSignUpForm" id="userSignUpForm">
-            <div>
-                <label for="name">First Name:</label>
-                <input type="text" id="fName-SignUp" name="first_name">
+    <div id="app">
+        <Section id="errorPanel" class="hidden">
+            <p id="error"></p>
+        </Section>
+    
+        <Section id="welcome" class="show">
+            <h1>Welcome to the To Do List Manager</h1>
+            <div id="welcomeButtons">
+                <button onclick="navegate(navegation.welcome, navegation.login)">Log In</button>
+                <span> or </span>
+                <button onclick="navegate(navegation.welcome, navegation.signup)">Sign Up</button>
             </div>
-            <div>
-                <label for="name">Last Name:</label>
-                <input type="text" id="lName-SignUp" name="last_name">
-            </div>
-            <div>
-                <label for="name">User:</label>
-                <input type="text" id="user-SignUp" name="user">
-            </div>
-            <div>
-                <label for="name">Password:</label>
-                <input type="password" id="password-SignUp" name="password">
-            </div>
-            <div>
-                <label for="mail">E-mail:</label>
-                <input type="email" id="mail-SignUp" name="user_mail">
-            </div>
-            <input id="userSignUpBTN" type="submit" value="Sign Up">
-        </form>
-    </section>
-
-    <section id="login" class="hidden">
-        <form name="loginForm" id="loginForm">
-            <div>
-                <label for="name">User:</label>
-                <input type="text" id="user-login" name="user">
-            </div>
-            <div>
-                <label for="name">Password:</label>
-                <input type="text" id="password-login" name="password">
-            </div>
-            <input id="userLoginBTN" type="submit" value="Login">
-        </form>
-    </section>
-
-    <section id="dashboard">
-        
-    </section>
+        </Section>
+    
+        <section id="signup" class="hidden">
+            <h1>Signup to the To Do Manager</h1>
+            <form name="userSignUpForm" id="userSignUpForm">
+                <div>
+                    <label for="name">First Name:</label>
+                    <input type="text" id="fName-SignUp" name="first_name">
+                </div>
+                <div>
+                    <label for="name">Last Name:</label>
+                    <input type="text" id="lName-SignUp" name="last_name">
+                </div>
+                <div>
+                    <label for="name">User:</label>
+                    <input type="text" id="user-SignUp" name="user">
+                </div>
+                <div>
+                    <label for="name">Password:</label>
+                    <input type="password" id="password-SignUp" name="password">
+                </div>
+                <div>
+                    <label for="mail">E-mail:</label>
+                    <input type="email" id="email-SignUp" name="user_mail">
+                </div>
+                <input id="userSignUpBTN" type="submit" value="Sign Up">
+            </form>
+        </section>
+    
+        <section id="login" class="hidden">
+            <h1>Welcome Back</h1>
+            <form name="loginForm" id="loginForm">
+                <div>
+                    <label for="name">User:</label>
+                    <input type="text" id="user-login" name="user">
+                </div>
+                <br>
+                <div>
+                    <label for="name">Password:</label>
+                    <input type="password" id="password-login" name="password">
+                </div>
+                <input id="userLoginBTN" type="submit" value="Login">
+            </form>
+        </section>
+    
+        <section id="dashboard" class="hidden">
+            <h1 id="dashboardTitle"></h1>
+            <div id="content"></div>
+        </section>
+    
+        <section id="settings" class="hidden">
+            
+        </section>
+    </div>
 </body>
 <script src="todolist.js"></script>
+<script src="todolistUtils.js"></script>
 </html>

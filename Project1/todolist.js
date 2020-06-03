@@ -1,76 +1,7 @@
 //Global Variables
 let user;
 let storage = window.localStorage;
-
-//Global Constants
-const navegation = {
-    welcome : 'welcome',
-    signup : 'signup',
-    login : 'login',
-    dashboard : 'dashboard',
-    errorPanel : 'errorPanel'
-}
-
-const errorTexts = {
-    noUser : 'No user with this Username',
-    usedUser : 'Username already used',
-    wrongPassword : 'Wrong Password',
-}
-
-// Utils Functions
-/**
- * User Object
- * @param {*} name 
- * @param {*} lastName 
- * @param {*} username 
- * @param {*} password 
- * @param {*} email 
- */
-const newUser = (name, lastName, username, password, email) => {
-    return {
-        name : name,
-        lastName : lastName,
-        username : username,
-        password : password,
-        email : email
-    }
-}
-
-/**
- * This function manage the navegation between sections in the Single Page App
- * @param from 
- * @param to 
- */
-const navegate = (from, to) => {
-    let sectionFrom = document.getElementById(from);
-    let sectionTo = document.getElementById(to);
-
-    sectionFrom.classList.add('hidden');
-    sectionFrom.classList.remove('show');
-
-    sectionTo.classList.remove('hidden');
-    sectionTo.classList.add('show');
-};
-
-const manageErrors = (errorText) => {
-    let errorSection = document.getElementById(navegation.errorPanel);
-    let errorP = document.getElementById('error');
-
-    errorP.innerText = errorText;
-
-    errorSection.classList.add('show');
-    errorSection.classList.remove('hidden');
-}
-
-const resetErrors = () => {
-    let errorSection = document.getElementById(navegation.errorPanel);
-    let errorP = document.getElementById(error);
-
-    errorP.innerText = '';
-    
-    errorSection.classList.remove('show');
-    errorSection.classList.add('hidden');
-}
+let actualPage;
 
 // View Functions
 /**
@@ -88,7 +19,8 @@ const userSignUp = (event) => {
 
     if(storage.getItem(user.username) === null){
         storage.setItem(user.username, user);
-        navegate(navegation.signin, navegation.dashboard)
+        showMenu();
+        navegate(navegation.signup, navegation.dashboard)
     } else {
         manageErrors(errorTexts.usedUser);
     }
@@ -103,6 +35,7 @@ const userLogin = (event) => {
     if(storage.getItem(document.getElementById("user-login").value) !== null){
         user = storage.getItem(document.getElementById("user-login").value);
         if(user.password === document.getElementById("password-login").value){
+            showMenu();
             navegate(navegation.login, navegation.dashboard)
         } else {
             manageErrors(errorTexts.wrongPassword);
@@ -110,7 +43,30 @@ const userLogin = (event) => {
     } else {
         manageErrors(errorTexts.noUser);
     }
-}
+};
+
+/**
+ * 
+ * @param {User} user 
+ */
+const getDashboard = (user) => {
+    let title = document.getElementById("dashboardTitle");
+    title.innerHTML = `Welcome, ${user.name}!`;
+    if(user.lists != null){
+        let defaultList = newList("Default", new Date());
+        user.lists = [defaultList];
+    }
+    let content = document.getElementById("content");
+    content.innerHTML = renderDashboard(user.lists);
+};
+
+const renderDashboard = (lists) => {
+    let html = `
+    <ul id="lists">
+        ${lists.map(list => `<li>${list.name}</li>`)}
+    </ul>
+    `;
+};
 
 // Event Listeners
 
