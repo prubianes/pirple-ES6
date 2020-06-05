@@ -5,7 +5,8 @@ const navegation = {
     login : 'login',
     dashboard : 'dashboard',
     errorPanel : 'errorPanel',
-    header : 'header'
+    header : 'header',
+    list : 'list' 
 }
 
 const errorTexts = {
@@ -29,7 +30,8 @@ const newUser = (name, lastName, username, password, email) => {
         lastName : lastName,
         username : username,
         password : password,
-        email : email
+        email : email,
+        lists: []
     }
 }
 
@@ -40,7 +42,8 @@ const newUser = (name, lastName, username, password, email) => {
 const newList = (name, created) => {
     return {
         name : name,
-        created : created
+        created : created,
+        tasks: []
     }
 }
 
@@ -145,3 +148,27 @@ const fillInnerTextById = (id, text) => {
     let element = document.getElementById(id);
     element.innerText = text;
 };
+
+const compareList = (list, otherList) => {
+    if(list.created > otherList.created){
+        return 1;
+    } else {
+        return -1;
+    }
+}
+
+const setUserToStorage = (user) => {
+    storage.setItem(user.username, JSON.stringify(user));
+};
+
+const getUserFromStorage = (id) => {
+    return JSON.parse(storage.getItem(id));
+};
+
+const listIsEmpty = (list) => {
+    for(var key in list) {
+        if(list.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+}
