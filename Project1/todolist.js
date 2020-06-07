@@ -84,9 +84,7 @@ const getListView = (list) => {
 
 const renderDashboard = (lists) => {
     let html = `<p id="lists">`;
-    for(list in lists){
-        html = html + `<spam id="${list.name}">${list.name}</spam>`
-    };
+    lists.forEach(list =>  html = html + `<spam id="${list.name}">${list.name}</spam><br>`)
     html = html + `</p>`;
     return html;
 };
