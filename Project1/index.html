@@ -9,8 +9,8 @@
     <header>
         <div id="header" class="hidden">
             <ul class="menu">
-                <li><button id="settings">Account Settings</button></li>
-                <li><button id="logout">Log Out</button></li>
+                <li><button id="settingsButton" onclick="navegateToSettings()">Account Settings</button></li>
+                <li><button id="logout" onclick="logout()">Log Out</button></li>
             </ul>
         </div>
     </header>
@@ -84,13 +84,40 @@
             <h1 id="ListTitle"></h1>
             <div>
                 <button onclick="addNewTask()">Create New Task</button>
+                <button onclick="editlistName()">Edit List Name</button>
             </div>
             <div id="contentList"></div>
             <button onclick="returnDashboard()">Dashboard</button>
         </section>
     
         <section id="settings" class="hidden">
-            
+            <h1>Account Settings</h1>
+            <h2 id="settingsUser"></h2>
+            <form name="settingsForm" id="settingsForm">
+                <div>
+                    <label for="name">First Name:</label>
+                    <input type="text" id="fName-settings" name="first_name">
+                </div>
+                <div>
+                    <label for="name">Last Name:</label>
+                    <input type="text" id="lName-settings" name="last_name">
+                </div>
+                <div>
+                    <label for="name">User:</label>
+                    <input type="text" id="user-settings" name="user">
+                </div>
+                <div>
+                    <label for="name">Password:</label>
+                    <input type="password" id="password-settings" name="password">
+                </div>
+                <div>
+                    <label for="mail">E-mail:</label>
+                    <input type="email" id="email-settings" name="user_mail">
+                </div>
+                <input id="settingsBTN" type="submit" value="Update">
+            </form>
+            <br>
+            <button onclick="returnFromSettings()">Return to Dashboard</button>
         </section>
     </div>
 </body>

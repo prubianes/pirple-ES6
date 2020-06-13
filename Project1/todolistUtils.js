@@ -13,6 +13,7 @@ const errorTexts = {
     noUser : 'No user with this Username',
     usedUser : 'Username already used',
     wrongPassword : 'Wrong Password',
+    listNameAlreadyUsed : 'List Name already used',
 }
 
 // Utils Functions
@@ -50,13 +51,11 @@ const newList = (name, created) => {
 /**
  * Task Object
  * @param {*} description 
- * @param {*} dueDate 
  * @param {*} isCompleted 
  */
-const newTask = (description, dueDate, isCompleted) => {
+const newTask = (description, isCompleted) => {
     return {
         description : description,
-        dueDate : dueDate,
         isCompleted : isCompleted
     }
 }
@@ -85,11 +84,16 @@ const hideMenu = () => {
  * Show the settings section and hides every other section
  */ 
 const navegateToSettings = () => {
-    document.getElementsByTagName('section').forEach(section => {
+    let userHeadline = document.getElementById("settingsUser");
+    userHeadline.innerHTML = `${user.name}`;
+
+    let selection = document.getElementsByTagName('section');
+    for(let section of selection) {
         section.classList.add('hidden');
         section.classList.remove('show');
-    })
+    };
     document.getElementById('settings').classList.add('show');
+    document.getElementById('settings').classList.remove('hidden');
 }
 
 /**
@@ -111,7 +115,7 @@ const manageErrors = (errorText) => {
  */
 const resetErrors = () => {
     let errorSection = document.getElementById(navegation.errorPanel);
-    let errorP = document.getElementById(error);
+    let errorP = document.getElementById('error');
 
     errorP.innerText = '';
     
@@ -150,7 +154,7 @@ const fillInnerTextById = (id, text) => {
 };
 
 const compareList = (list, otherList) => {
-    if(list.created > otherList.created){
+    if(list.created < otherList.created){
         return 1;
     } else {
         return -1;
@@ -165,6 +169,10 @@ const getUserFromStorage = (id) => {
     return JSON.parse(storage.getItem(id));
 };
 
+/**
+ * 
+ * @param {*} list 
+ */
 const listIsEmpty = (list) => {
     for(var key in list) {
         if(list.hasOwnProperty(key))
@@ -172,3 +180,34 @@ const listIsEmpty = (list) => {
     }
     return true;
 }
+
+/**
+ * 
+ * @param {*} user 
+ * @param {*} listName 
+ */
+const getListByName = (user, listName) => {
+    let list;
+    for (let index = 0; index < user.lists.length; index++) {
+        list = user.lists[index];
+        if(listName === list.name){
+            break;
+        }
+    }
+    return list;
+};
+
+/**
+ * 
+ * @param {*} user 
+ * @param {*} listNewName 
+ */
+const checkListNewName = (user, listNewName) => {
+    let result;
+    user.lists.forEach(list => {
+        if(list.name === listNewName){
+            result = true;
+        }
+    })
+    return result;
+};
