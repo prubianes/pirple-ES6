@@ -86,3 +86,7 @@ li {
 .completed {
     text-decoration: line-through;
 }
+
+#userSignUpBTN {
+    margin-top: 15px;
+}

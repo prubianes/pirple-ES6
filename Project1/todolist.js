@@ -1,4 +1,5 @@
 //Global Variables
+let hash = objectHash;
 let user;
 let storage = window.localStorage;
 let actualPage;
@@ -16,15 +17,23 @@ const userSignUp = (event) => {
     let username = document.getElementById("user-SignUp").value;
     let password = document.getElementById("password-SignUp").value;
     let email = document.getElementById("email-SignUp").value;
-    user = newUser(name, lastName, username, password, email);
+    let checked = document.getElementById("check-SignUp").checked;
 
-    if(storage.getItem(user.username) === null){
-        setUserToStorage(user);
-        showMenu();
-        getDashboard(user);
-        navegate(navegation.signup, navegation.dashboard);
-    } else {
-        manageErrors(errorTexts.usedUser);
+    if(checked){
+        password = hash.sha1(password);
+
+        user = newUser(name, lastName, username, password, email);
+    
+        if(storage.getItem(user.username) === null){
+            setUserToStorage(user);
+            showMenu();
+            getDashboard(user);
+            navegate(navegation.signup, navegation.dashboard);
+        } else {
+            manageErrors(errorTexts.usedUser);
+        }
+    } else{
+        manageErrors(errorTexts.mustAcceptTerms);
     }
 };
 
@@ -38,7 +47,7 @@ const userLogin = (event) => {
     let userID = document.getElementById("user-login").value;
     if(storage.getItem(userID) !== null){
         user = getUserFromStorage(userID);
-        if(user.password === document.getElementById("password-login").value){
+        if(user.password === hash.sha1(document.getElementById("password-login").value)){
             showMenu();
             getDashboard(user);
             navegate(navegation.login, navegation.dashboard);
@@ -109,6 +118,10 @@ const workWithList = (event) => {
     navegate(navegation.dashboard, navegation.list);
 }
 
+/**
+ * Render dashboard HTML
+ * @param {*} lists 
+ */
 const renderDashboard = (lists) => {
     let html = `<p id="lists">`;
     lists.forEach(list =>  html = html + `<spam class="listItem">${list.name}</spam><br>`)
@@ -116,6 +129,10 @@ const renderDashboard = (lists) => {
     return html;
 };
 
+/**
+ * Render List HTML
+ * @param {*} list 
+ */
 const renderList = (list) => {
     let html = `<ul id="tasks">`
     list.tasks.forEach(task => { 
@@ -139,84 +156,6 @@ const renderList = (list) => {
     return html;
 };
 
-const returnDashboard = () => {
-    getDashboard(user);
-    navegate(navegation.list, navegation.dashboard);
-}
-
-const returnFromSettings = () => {
-    getDashboard(user);
-    navegate(navegation.settings, navegation.dashboard);
-}
-
-const addNewList = () => {
-    let newlistName = window.prompt('Name for the List:');
-    let list = newList(newlistName, Date.now());
-    user.lists.push(list);
-
-    setUserToStorage(user);
-
-    getListView(list);
-    navegate(navegation.dashboard, navegation.list);
-}
-
-const editlistName = () => {
-    resetErrors();
-    let newName = window.prompt('New List Name:');
-    if(checkListNewName(user, newName)){
-        manageErrors(errorTexts.listNameAlreadyUsed);
-        return;
-    }
-    let oldListName = document.getElementById("ListTitle").innerText;
-    let listToUpdate = getListByName(user, oldListName);
-
-    user.lists = user.lists.filter(list => list !== listToUpdate);
-
-    listToUpdate.name = newName;
-    user.lists.push(listToUpdate);
-
-    setUserToStorage(user);
-
-    document.getElementById("ListTitle").innerHTML = newName;
-}
-
-const addNewTask = () => {
-    let newTaskName = window.prompt('New Task:');
-    let task = newTask(newTaskName, false);
-
-    let listName = document.getElementById("ListTitle").innerText;
-    let listToUpdate = getListByName(user, listName);
-
-    user.lists = user.lists.filter(list => list !== listToUpdate);
-
-    listToUpdate.tasks.push(task);
-    user.lists.push(listToUpdate);
-
-    setUserToStorage(user);
-
-    getListView(listToUpdate);
-}
-
-const checktask = (event) => {
-    event.preventDefault();
-    let taskEvent = event.target.name;
-
-    let listName = document.getElementById("ListTitle").innerText;
-    let listToUpdate = getListByName(user, listName);
-
-    user.lists = user.lists.filter(list => list !== listToUpdate);
-
-    listToUpdate.tasks.forEach(task => {
-        if(task.description === taskEvent){
-            task.isCompleted = !task.isCompleted;
-        }
-    })
-    user.lists.push(listToUpdate);
-
-    setUserToStorage(user);
-    getListView(listToUpdate);
-}
-
 const logout = () => {
     user = undefined;
     let selection = document.getElementsByTagName('section');
@@ -238,14 +177,31 @@ const settingsUpdate = (event) => {
     let password = document.getElementById("password-settings").value;
     let email = document.getElementById("email-settings").value;
 
-    if(username !== "" && (storage.getItem(username) !== null)){
-        manageErrors(errorTexts.usedUser);
-        return;
+    if(username !== ""){
+        if(storage.getItem(username) !== null){
+            manageErrors(errorTexts.usedUser);
+            return;
+        }
+        storage.removeItem(user.username);
+        user.username = username;
     }
+    if(name !== ""){
+        user.name = name;
+        let userHeadline = document.getElementById("settingsUser");
+        userHeadline.innerHTML = `${user.name}`;
+    }
+    if(lastName !== ""){
+        user.lastName = lastName;
+    }
+    if(email !== ""){
+        user.email = email;
+    }
+    if(password !== ""){
+        password = hash.sha1(password);
+        user.password = password;
+    } 
 
-    let userHeadline = document.getElementById("settingsUser");
-    userHeadline.innerHTML = `${user.name}`;
-
+    setUserToStorage(user);
 }
 
 // Event Listeners

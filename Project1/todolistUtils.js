@@ -6,7 +6,8 @@ const navegation = {
     dashboard : 'dashboard',
     errorPanel : 'errorPanel',
     header : 'header',
-    list : 'list' 
+    list : 'list',
+    settings : 'settings'
 }
 
 const errorTexts = {
@@ -14,6 +15,7 @@ const errorTexts = {
     usedUser : 'Username already used',
     wrongPassword : 'Wrong Password',
     listNameAlreadyUsed : 'List Name already used',
+    mustAcceptTerms : 'Must agree the Terms of Use',
 }
 
 // Utils Functions
@@ -211,3 +213,81 @@ const checkListNewName = (user, listNewName) => {
     })
     return result;
 };
+
+const returnDashboard = () => {
+    getDashboard(user);
+    navegate(navegation.list, navegation.dashboard);
+}
+
+const returnFromSettings = () => {
+    getDashboard(user);
+    navegate(navegation.settings, navegation.dashboard);
+}
+
+const addNewList = () => {
+    let newlistName = window.prompt('Name for the List:');
+    let list = newList(newlistName, Date.now());
+    user.lists.push(list);
+
+    setUserToStorage(user);
+
+    getListView(list);
+    navegate(navegation.dashboard, navegation.list);
+}
+
+const editlistName = () => {
+    resetErrors();
+    let newName = window.prompt('New List Name:');
+    if(checkListNewName(user, newName)){
+        manageErrors(errorTexts.listNameAlreadyUsed);
+        return;
+    }
+    let oldListName = document.getElementById("ListTitle").innerText;
+    let listToUpdate = getListByName(user, oldListName);
+
+    user.lists = user.lists.filter(list => list !== listToUpdate);
+
+    listToUpdate.name = newName;
+    user.lists.push(listToUpdate);
+
+    setUserToStorage(user);
+
+    document.getElementById("ListTitle").innerHTML = newName;
+}
+
+const addNewTask = () => {
+    let newTaskName = window.prompt('New Task:');
+    let task = newTask(newTaskName, false);
+
+    let listName = document.getElementById("ListTitle").innerText;
+    let listToUpdate = getListByName(user, listName);
+
+    user.lists = user.lists.filter(list => list !== listToUpdate);
+
+    listToUpdate.tasks.push(task);
+    user.lists.push(listToUpdate);
+
+    setUserToStorage(user);
+
+    getListView(listToUpdate);
+}
+
+const checktask = (event) => {
+    event.preventDefault();
+    let taskEvent = event.target.name;
+
+    let listName = document.getElementById("ListTitle").innerText;
+    let listToUpdate = getListByName(user, listName);
+
+    user.lists = user.lists.filter(list => list !== listToUpdate);
+
+    listToUpdate.tasks.forEach(task => {
+        if(task.description === taskEvent){
+            task.isCompleted = !task.isCompleted;
+        }
+    })
+    user.lists.push(listToUpdate);
+
+    setUserToStorage(user);
+    getListView(listToUpdate);
+}
