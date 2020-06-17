@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>To Do List Manager</title>
+</head>
+<body onload="">
+    <header>
+        <div id="header" class="hidden">
+            <ul class="menu">
+                <li><button id="settingsButton" onclick="navegateToSettings()">Account Settings</button></li>
+                <li><button id="logout" onclick="logout()">Log Out</button></li>
+            </ul>
+        </div>
+    </header>
+    <div id="app">
+        <Section id="errorPanel" class="hidden">
+            <p id="error"></p>
+        </Section>
+    
+        <Section id="welcome" class="show">
+            <h1>Welcome to the To Do List Manager</h1>
+            <div id="welcomeButtons">
+                <button onclick="navegate(navegation.welcome, navegation.login)">Log In</button>
+                <span> or </span>
+                <button onclick="navegate(navegation.welcome, navegation.signup)">Sign Up</button>
+            </div>
+        </Section>
+    
+        <section id="signup" class="hidden">
+            <h1>Signup to the To Do Manager</h1>
+            <form name="userSignUpForm" id="userSignUpForm">
+                <div>
+                    <label for="name">First Name:</label>
+                    <input type="text" id="fName-SignUp" name="first_name">
+                </div>
+                <div>
+                    <label for="name">Last Name:</label>
+                    <input type="text" id="lName-SignUp" name="last_name">
+                </div>
+                <div>
+                    <label for="name">User:</label>
+                    <input type="text" id="user-SignUp" name="user">
+                </div>
+                <div>
+                    <label for="name">Password:</label>
+                    <input type="password" id="password-SignUp" name="password">
+                </div>
+                <div>
+                    <label for="mail">E-mail:</label>
+                    <input type="email" id="email-SignUp" name="user_mail">
+                </div>
+                <input type="checkbox" class="signCheck" name="accept" value="accept" id="check-SignUp">
+                <span>I agree to the Terms of Use</span> <br> 
+                <input id="userSignUpBTN" type="submit" value="Sign Up">
+            </form>
+        </section>
+    
+        <section id="login" class="hidden">
+            <h1>Welcome Back</h1>
+            <form name="loginForm" id="loginForm">
+                <div>
+                    <label for="name">User:</label>
+                    <input type="text" id="user-login" name="user">
+                </div>
+                <br>
+                <div>
+                    <label for="name">Password:</label>
+                    <input type="password" id="password-login" name="password">
+                </div>
+                <input id="userLoginBTN" type="submit" value="Login">
+            </form>
+        </section>
+    
+        <section id="dashboard" class="hidden">
+            <h1 id="dashboardTitle"></h1>
+            <div>
+                <button onclick="addNewList()">Create New to-do List</button>
+            </div>
+            <br>
+            <div id="contentDashboard"></div>
+        </section>
+
+        <section id="list" class="hidden">
+            <h1 id="ListTitle"></h1>
+            <div>
+                <button onclick="addNewTask()">Create New Task</button>
+                <button onclick="editlistName()">Edit List Name</button>
+            </div>
+            <div id="contentList"></div>
+            <button onclick="returnDashboard()">Dashboard</button>
+        </section>
+    
+        <section id="settings" class="hidden">
+            <h1>Account Settings</h1>
+            <h2 id="settingsUser"></h2>
+            <form name="settingsForm" id="settingsForm">
+                <div>
+                    <label for="name">First Name:</label>
+                    <input type="text" id="fName-settings" name="first_name">
+                </div>
+                <div>
+                    <label for="name">Last Name:</label>
+                    <input type="text" id="lName-settings" name="last_name">
+                </div>
+                <div>
+                    <label for="name">User:</label>
+                    <input type="text" id="user-settings" name="user">
+                </div>
+                <div>
+                    <label for="name">Password:</label>
+                    <input type="password" id="password-settings" name="password">
+                </div>
+                <div>
+                    <label for="mail">E-mail:</label>
+                    <input type="email" id="email-settings" name="user_mail">
+                </div>
+                <input id="settingsBTN" type="submit" value="Update">
+            </form>
+            <br>
+            <button onclick="returnFromSettings()">Return to Dashboard</button>
+        </section>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/object-hash@2.0.3/dist/object_hash.js"></script>
+<script src="todolist.js"></script>
+<script src="todolistUtils.js"></script>
+</html>
