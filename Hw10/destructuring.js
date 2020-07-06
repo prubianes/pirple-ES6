@@ -17,3 +17,31 @@ but for ease of use I feel more comfortable to use deconstruction with Objects
 because the use of properties prevent you to have to know all the items that an Array has and the order they have.
 */
 
+
+// Example: Objects
+const aObject = {
+    country: 'Uruguay',
+    capital: 'Montevideo',
+    countryCode: 'UY',
+    continent: 'South America',
+}
+
+// set constants from the values of the object
+const {country, capital, continent} = aObject;
+console.log(`Object: ${country}'s, Capital is ${capital}, located in ${continent}`);
+
+// Setting constant without using object property name as constant name
+const {countryCode: code} = aObject;
+console.log(code);
+
+
+// Example: Array
+const anArray = ['Uruguay', 'Montevideo', 'South America', 'UY'];
+
+// set constants from the values of the array
+const [countryArray, capitalArray, continentArray] = anArray;
+console.log(`Array: ${countryArray}'s, Capital is ${capitalArray}, located in ${continentArray}`);
+
+// skipping values from the array
+const [,,,codeArray] = anArray;
+console.log(codeArray);
